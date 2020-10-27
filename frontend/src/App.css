@@ -1,0 +1,158 @@
+html {
+  font-size: 62.5%; /* 16px * 62.5 = 10px = 1rem */
+  box-sizing: border-box;
+}
+body {
+  font: 1.6rem Helvetica;
+  height: 100vh;
+  margin: 0;
+}
+button {
+  font-size: 1.6rem;
+  background-color: #61c0bf;
+}
+.full-width {
+  width: 100%;
+}
+#root {
+  height: 100%;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  padding: 0.5rem;
+}
+
+/* Signup */
+
+.form{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  
+}
+
+.form-container{
+  display: flex;
+  flex-direction: column;
+  width: 32rem;
+  padding: 2rem;
+  background-color: #eaeaea;
+
+}
+
+input{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: none;
+  border-bottom: 2px solid black;
+
+  
+}
+.button{
+  padding: .8rem;
+  border: 0.1rem #222831 solid ;
+  cursor: pointer;
+  width: 23rem;
+  margin-top: 2rem;
+  border-radius: 0.8rem;
+
+} 
+
+select{
+  margin: '.5em 0 0 0';
+  padding: '.5em'
+}
+.verify-form{
+  display: flex;
+  list-style-type: none;
+ 
+  
+}
+.verify-form  input{
+  margin: 0.5rem;
+  max-width: 2.5rem;
+}
+
+.flex-container{
+  display: flex;
+  flex-direction: row;
+
+}
+.flex-container select{
+  max-width: 9rem;
+  max-height: 7rem;
+  margin: 8px 5px;
+  border: none;
+  border-bottom: 2px solid black;
+}
+
+/* Question Page */
+
+.q-container p{
+  background-color: #d2d3c9;
+  padding: 2rem;
+  min-width: 50rem;
+  
+}
+.q-container p:hover{
+  background-color: #a3d8f4;
+}
+.q-container h2{
+color: #1f3c88;
+}
+.timer{
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  color: #0d7377;
+  height: 5rem;
+}
+.timer-container{
+  
+  padding: .5rem;
+  border: 3px solid #686d76;
+  border-radius: 70%;
+  font-size: 3rem;
+  color: #e23e57;
+}
+
+@media only screen and (max-width: 600px){
+  .q-container p{
+    min-width: 1rem;
+  }
+
+}
+
+
+/* subjective*/
+
+.form-subject{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+/* .input-sub{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+} */
+.input-field{
+  width: 70%;
+  padding: 12px 20px;
+  margin: 1px 0;
+  border-bottom: 1px solid #3f72af;
+
+  
+}
