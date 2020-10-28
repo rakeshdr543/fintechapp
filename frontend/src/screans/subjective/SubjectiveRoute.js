@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Route } from "react-router";
 import Testing from "../Testing";
@@ -18,6 +19,42 @@ const SubjectiveRoute = () => {
   const [relationShip, setRelationShip] = useState("");
   const [houseType, setHouseType] = useState("");
   const [language, setLanguage] = useState("");
+
+  const handleSubmitDetails = async () => {
+    if (
+      userType &&
+      company &&
+      position &&
+      dependent &&
+      digitalUse &&
+      dob &&
+      city &&
+      location &&
+      financeStatus &&
+      relationShip &&
+      houseType &&
+      language
+    ) {
+      const res = localStorage.getItem("user");
+      const user = JSON.parse(res);
+      const { data } = await axios.post("/api/subjective", {
+        userId: user._id,
+        userType: userType,
+        company: company,
+        position: position,
+        dependent: dependent,
+        digitalUse: digitalUse,
+        dob: dob,
+        city: city,
+        location: location,
+        financeStatus: financeStatus,
+        relationShip: relationShip,
+        houseType: houseType,
+        language: language,
+      });
+      console.log("subjective inserted", data);
+    }
+  };
   return (
     <div className='content'>
       <Route
@@ -58,6 +95,7 @@ const SubjectiveRoute = () => {
             language={language}
             setLanguage={setLanguage}
             location={location}
+            handleSubmitDetails={handleSubmitDetails}
           />
         )}
       />

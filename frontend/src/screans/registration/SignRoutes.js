@@ -17,7 +17,10 @@ const SignRoutes = () => {
       email: email,
       phoneNumber: phoneNumber,
     });
+    localStorage.setItem("user", JSON.stringify(data));
     console.log("saved data", data);
+    const res = localStorage.getItem("user");
+    console.log("data from local storage", JSON.parse(res));
   };
 
   return (
@@ -38,6 +41,7 @@ const SignRoutes = () => {
           <MobileForm {...props} setPhoneNumber={setPhoneNumber} />
         )}
       />
+
       <Route
         path='/user/verify-otp'
         render={(props) => (

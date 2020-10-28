@@ -20,6 +20,7 @@ const SecondSubjectivePage = ({
   language,
   setLanguage,
   location,
+  handleSubmitDetails,
 }) => {
   const history = useHistory();
 
@@ -131,7 +132,11 @@ const SecondSubjectivePage = ({
           </FormControl>
         </ListItem> */}
         <ListItem>
-          <Button variant='contained' color='primary'>
+          <Button
+            variant='contained'
+            onClick={handleSubmitDetails}
+            color='primary'
+          >
             Submit
           </Button>
         </ListItem>

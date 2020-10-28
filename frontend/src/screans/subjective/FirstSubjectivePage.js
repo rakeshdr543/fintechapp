@@ -142,6 +142,7 @@ const FirstSubjectivePage = ({
                 <FormControl>
                   <input
                     className='input-field'
+                    value={dob}
                     type='date'
                     onChange={(e) => setDob(e.target.value)}
                   />

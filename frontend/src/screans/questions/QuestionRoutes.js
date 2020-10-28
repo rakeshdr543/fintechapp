@@ -18,8 +18,10 @@ const QuestionRoutes = () => {
   const handleSaveAnswers = async () => {
     console.log("checking ans in ", ansOne, ansTwo, ansThree, ansFour, ansFive);
     if (ansOne && ansTwo && ansThree && ansFour && ansFive && !saved) {
+      const res = localStorage.getItem("user");
+      const user = JSON.parse(res);
       const { data } = await axios.post("/api/answers", {
-        userId: "12345",
+        userId: user._id,
         q1: ansOne,
         q2: ansTwo,
         q3: ansThree,
