@@ -1,6 +1,7 @@
 import express from "express";
 import CreditCardBill from "../models/objectiveModels/CreditCardBillsModel";
 import InsurancePremium from "../models/objectiveModels/InsurancePremium";
+import loanEMIModel from "../models/objectiveModels/LoanEMI";
 
 const router = express.Router();
 
@@ -37,6 +38,27 @@ router.post("/insurancePremium", async (req, res) => {
     const newInsurancePremium = await insurancePremium.save();
     console.log("inserted Insurance Premium details");
     res.send(newInsurancePremium);
+  } catch (error) {
+    res.status(401).send({ message: error.message });
+  }
+});
+
+//Post request for Loan EMI
+
+router.post("/loanEmi", async (req, res) => {
+  try {
+    const loanEMI = new loanEMIModel({
+      userId: req.body.userId,
+      typeOfLoan: req.body.typeOfLoan,
+      principalAmt: req.body.principalAmt,
+      intAmt: req.body.intAmt,
+      paid_NotPaid_SinceHowManyTimes: req.body.paid_NotPaid_SinceHowManyTimes,
+      dependentName: req.body.dependentName,
+      annuityType: req.body.annuityType,
+    });
+    const newLoanEMI = await loanEMI.save();
+    console.log("inserted Loan EMI details");
+    res.send(newLoanEMI);
   } catch (error) {
     res.status(401).send({ message: error.message });
   }
