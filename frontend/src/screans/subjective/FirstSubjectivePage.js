@@ -63,13 +63,13 @@ const FirstSubjectivePage = ({
   };
 
   return (
-    <Container maxWidth='md'>
+    <Container maxWidth='sm'>
       <Card className='form-subject'>
         <List>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <ListItem>
-                <Typography variant='h3'>Tell Us more about You</Typography>
+                <Typography variant='h4'>Tell Us more about You</Typography>
               </ListItem>
             </Grid>
 

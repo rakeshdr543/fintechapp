@@ -1,7 +1,8 @@
 import express from "express";
 import CreditCardBill from "../models/objectiveModels/CreditCardBillsModel";
 import InsurancePremium from "../models/objectiveModels/InsurancePremium";
-import loanEMIModel from "../models/objectiveModels/LoanEMI";
+import LoanEMI from "../models/objectiveModels/LoanEMI";
+import Mortage from "../models/objectiveModels/Mortgage";
 
 const router = express.Router();
 
@@ -47,7 +48,7 @@ router.post("/insurancePremium", async (req, res) => {
 
 router.post("/loanEmi", async (req, res) => {
   try {
-    const loanEMI = new loanEMIModel({
+    const loanEmi = new LoanEMI({
       userId: req.body.userId,
       typeOfLoan: req.body.typeOfLoan,
       principalAmt: req.body.principalAmt,
@@ -56,11 +57,31 @@ router.post("/loanEmi", async (req, res) => {
       dependentName: req.body.dependentName,
       annuityType: req.body.annuityType,
     });
-    const newLoanEMI = await loanEMI.save();
+    const newLoanEmi = await loanEmi.save();
     console.log("inserted Loan EMI details");
-    res.send(newLoanEMI);
+    res.send(newLoanEmi);
   } catch (error) {
     res.status(401).send({ message: error.message });
   }
 });
+
+//Post request for Mortage
+
+router.post("/mortage", async (req, res) => {
+  try {
+    const mortage = new Mortage({
+      userId: req.body.userId,
+      amountOfMortgage: req.body.amountOfMortgage,
+      intRate: req.body.intRate,
+      dateOfMortgage: req.body.dateOfMortgage,
+      payableForHowManyMonths: req.body.payableForHowManyMonths,
+    });
+    const newMortage = await mortage.save();
+    console.log("inserted  Mortage details");
+    res.send(newMortage);
+  } catch (error) {
+    res.status(401).send({ message: error.message });
+  }
+});
+
 export default router;
