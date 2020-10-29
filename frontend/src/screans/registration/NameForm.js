@@ -1,9 +1,27 @@
-import { Box, Button, Card, CardContent } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Container,
+  List,
+  ListItem,
+  MenuItem,
+  Select,
+  TextField,
+  ThemeProvider,
+  Typography,
+  createMuiTheme,
+  responsiveFontSizes,
+} from "@material-ui/core";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
+let theme = createMuiTheme();
+theme = responsiveFontSizes(theme);
 const NameForm = ({ setName }) => {
   let history = useHistory();
+  const [initial, setInitial] = useState("Mr");
   const [nameField, setNameField] = useState();
 
   const handleNameSubmit = (e) => {
@@ -12,40 +30,63 @@ const NameForm = ({ setName }) => {
     history.push("/user/email");
   };
   return (
-    <div className='form'>
+    <Container maxWidth='sm'>
       <Card>
-        <form
-          onSubmit={handleNameSubmit}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") return handleNameSubmit;
-          }}
-          className='form-container'
-        >
-          <CardContent>
-            <h2>Welcome to the Future</h2>
-            <div className='flex-container'>
-              <select name='title'>
-                <option disabled>Title</option>
-                <option value='mr'>Mr</option>
-                <option value='mrs'>Mrs</option>
-              </select>
-              <input
-                type='name'
-                name='name'
-                id='name'
-                placeholder='Enter Your Name'
-                required
-                onChange={(e) => setNameField(e.target.value)}
-              ></input>
-            </div>
-            <Button type='submit' variant='contained' color='primary'>
-              {" "}
-              Next{" "}
-            </Button>
-          </CardContent>
-        </form>
+        <CardContent>
+          <form
+            onSubmit={handleNameSubmit}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") return handleNameSubmit;
+            }}
+            className='form-container'
+          >
+            <List>
+              <ListItem>
+                <ThemeProvider theme={theme}>
+                  <Typography variant='h4'> Welcome to the Future</Typography>
+                </ThemeProvider>
+
+                {/* <Typography variant='h4' gutterBottom>
+                 
+                </Typography> */}
+              </ListItem>
+              <ListItem>
+                <TextField
+                  id='select'
+                  value={initial}
+                  onChange={(e) => setInitial(e.target.value)}
+                  select
+                >
+                  <MenuItem value='Mr'>Mr</MenuItem>
+                  <MenuItem value='Mrs'>Mrs</MenuItem>
+                </TextField>
+                {/* <div className='flex-container'> */}
+                {/* <Select value='title' onChange={(e) => setInitial(e.target.value)}>
+              <MenuItem disabled>Title</MenuItem>
+              <MenuItem value='mr'>Mr</MenuItem>
+              <MenuItem value='mrs'>Mrs</MenuItem>
+            </Select> */}
+                <TextField
+                  type='name'
+                  name='name'
+                  id='name'
+                  placeholder='Enter Your Name'
+                  required
+                  onChange={(e) => setNameField(e.target.value)}
+                ></TextField>
+                {/* </div> */}
+              </ListItem>
+              <ListItem>
+                <Button type='submit' variant='contained' color='primary'>
+                  {" "}
+                  Next{" "}
+                </Button>
+              </ListItem>
+            </List>
+          </form>
+        </CardContent>
       </Card>
-    </div>
+    </Container>
   );
 };
 

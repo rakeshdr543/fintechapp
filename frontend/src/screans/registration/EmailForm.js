@@ -1,7 +1,21 @@
-import { Button, Card, CardContent } from "@material-ui/core";
+import {
+  Button,
+  Card,
+  CardContent,
+  List,
+  createMuiTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+  Typography,
+  TextField,
+  ListItem,
+  Container,
+} from "@material-ui/core";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
+let theme = createMuiTheme();
+theme = responsiveFontSizes(theme);
 const EmailForm = ({ setEmail }) => {
   let history = useHistory();
   const [emailField, setEmailField] = useState();
@@ -12,9 +26,9 @@ const EmailForm = ({ setEmail }) => {
     history.push("/user/phone");
   };
   return (
-    <>
-      <div className='form'>
-        <Card>
+    <Container maxWidth='sm'>
+      <Card>
+        <CardContent>
           <form
             onSubmit={handleEmailSubmit}
             onKeyDown={(e) => {
@@ -22,27 +36,33 @@ const EmailForm = ({ setEmail }) => {
             }}
             className='form-container'
           >
-            <CardContent>
-              <h2>Enter Your Email</h2>
-              <div className='flex-container'>
-                <input
+            <List>
+              <ListItem>
+                <ThemeProvider theme={theme}>
+                  <Typography variant='h4'> Enter Your Email</Typography>
+                </ThemeProvider>
+              </ListItem>
+              <ListItem>
+                <TextField
                   type='email'
                   name='email'
                   id='email'
                   placeholder='Enter Your Email address'
                   required
                   onChange={(e) => setEmailField(e.target.value)}
-                ></input>
-              </div>
-              <Button type='submit' variant='contained' color='primary'>
-                {" "}
-                Next{" "}
-              </Button>
-            </CardContent>
+                ></TextField>
+              </ListItem>
+              <ListItem>
+                <Button type='submit' variant='contained' color='primary'>
+                  {" "}
+                  Next{" "}
+                </Button>
+              </ListItem>
+            </List>
           </form>
-        </Card>
-      </div>
-    </>
+        </CardContent>
+      </Card>
+    </Container>
   );
 };
 

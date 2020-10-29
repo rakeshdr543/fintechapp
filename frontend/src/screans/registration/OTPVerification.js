@@ -2,8 +2,22 @@ import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { Button, Card } from "@material-ui/core";
+import {
+  Button,
+  Card,
+  CardContent,
+  Container,
+  List,
+  ListItem,
+  TextField,
+  ThemeProvider,
+  Typography,
+  createMuiTheme,
+  responsiveFontSizes,
+} from "@material-ui/core";
 
+let theme = createMuiTheme();
+theme = responsiveFontSizes(theme);
 const OTPVerification = ({ phoneNumber, handleSaveUser }) => {
   let history = useHistory();
   const [v1, setV1] = useState();
@@ -47,50 +61,69 @@ const OTPVerification = ({ phoneNumber, handleSaveUser }) => {
     }
   }, [success]);
   return (
-    <div className='form'>
+    <Container maxWidth='sm'>
       <Card>
-        <form
-          className='form-container'
-          onSubmit={otpHandler}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") return otpHandler;
-          }}
-        >
-          <h2>Verifying Your Number</h2>
-          {success && <ToastContainer position='top-center' />}
-          <p>We have sent you an OTP to your number {phoneNumber} </p>
-          {errMsg && <p style={{ color: "red" }}>{errMsg}</p>}
-
-          <div className='verify-form'>
-            <input
-              type='text'
-              maxLength={1}
-              onChange={(e) => setV1(e.target.value)}
-            />
-            <input
-              type='text'
-              maxLength={1}
-              onChange={(e) => setV2(e.target.value)}
-            />
-            <input
-              type='text'
-              maxLength={1}
-              onChange={(e) => setV3(e.target.value)}
-            />
-            <input
-              type='text'
-              maxLength={1}
-              onChange={(e) => setV4(e.target.value)}
-              required
-            />
-          </div>
-          <Button type='submit' variant='contained' color='primary'>
-            {" "}
-            Next{" "}
-          </Button>
-        </form>
+        <CardContent>
+          <form
+            className='form-container'
+            onSubmit={otpHandler}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") return otpHandler;
+            }}
+          >
+            <List>
+              <ListItem>
+                <ThemeProvider theme={theme}>
+                  <Typography variant='h4'> Verifying Your Number</Typography>
+                </ThemeProvider>
+              </ListItem>
+              {success && <ToastContainer position='top-center' />}
+              <ListItem>
+                <ThemeProvider theme={theme}>
+                  <Typography variant='h6'>
+                    {" "}
+                    We have sent you an OTP to your number {phoneNumber}
+                  </Typography>
+                </ThemeProvider>
+              </ListItem>
+              {/* <p>We have sent you an OTP to your number {phoneNumber} </p> */}
+              {errMsg && <p style={{ color: "red" }}>{errMsg}</p>}
+              <ListItem>
+                <div className='verify-form'>
+                  <TextField
+                    type='text'
+                    maxLength={1}
+                    onChange={(e) => setV1(e.target.value)}
+                  />
+                  <TextField
+                    type='text'
+                    maxLength={1}
+                    onChange={(e) => setV2(e.target.value)}
+                  />
+                  <TextField
+                    type='text'
+                    maxLength={1}
+                    onChange={(e) => setV3(e.target.value)}
+                  />
+                  <TextField
+                    type='text'
+                    maxLength={1}
+                    onChange={(e) => setV4(e.target.value)}
+                    required
+                  />
+                </div>
+              </ListItem>
+              <ListItem>
+                <Button type='submit' variant='contained' color='primary'>
+                  {" "}
+                  Submit{" "}
+                </Button>
+              </ListItem>
+            </List>
+          </form>
+        </CardContent>
       </Card>
-    </div>
+    </Container>
   );
 };
 
