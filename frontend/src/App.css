@@ -103,7 +103,7 @@ select{
 .q-container p{
   background-color: #d2d3c9;
   padding: 2rem;
-  min-width: 50rem;
+  min-width: 30rem;
   
 }
 .q-container p:hover{

@@ -1,8 +1,11 @@
 import express from "express";
+import Bond from "../models/objectiveModels/Bonds";
 import CreditCardBill from "../models/objectiveModels/CreditCardBillsModel";
 import InsurancePremium from "../models/objectiveModels/InsurancePremium";
 import LoanEMI from "../models/objectiveModels/LoanEMI";
 import Mortage from "../models/objectiveModels/Mortgage";
+import MutualFund from "../models/objectiveModels/MutualFund";
+import NSC from "../models/objectiveModels/NSC";
 
 const router = express.Router();
 
@@ -79,6 +82,69 @@ router.post("/mortage", async (req, res) => {
     const newMortage = await mortage.save();
     console.log("inserted  Mortage details");
     res.send(newMortage);
+  } catch (error) {
+    res.status(401).send({ message: error.message });
+  }
+});
+
+//Post request for Mutual Fund
+
+router.post("/mutualFund", async (req, res) => {
+  try {
+    const mutualFund = new MutualFund({
+      userId: req.body.userId,
+      dayOfInvestment: req.body.dayOfInvestment,
+      whatPurpose: req.body.whatPurpose,
+      amountOfInvestment: req.body.amountOfInvestment,
+      type: req.body.type,
+      sipMaturity: req.body.sipMaturity,
+      fundInvestedIn: req.body.fundInvestedIn,
+    });
+    const newMutualFund = await mutualFund.save();
+    console.log("inserted  Mutual Fund details");
+    res.send(newMutualFund);
+  } catch (error) {
+    res.status(401).send({ message: error.message });
+  }
+});
+
+//Post request for Bonds
+
+router.post("/bonds", async (req, res) => {
+  try {
+    const bond = new Bond({
+      userId: req.body.userId,
+      bondName: req.body.bondName,
+      bondAmountOfInvestment: req.body.bondAmountOfInvestment,
+      dateOfInvestment: req.body.dateOfInvestment,
+      brokerInvestedThrough: req.body.brokerInvestedThrough,
+      purposeOfBonds: req.body.purposeOfBonds,
+      dependentName: req.body.dependentName,
+    });
+    const newBond = await bond.save();
+    console.log("inserted Bonds details");
+    res.send(newBond);
+  } catch (error) {
+    res.status(401).send({ message: error.message });
+  }
+});
+
+//Post request for NSC
+
+router.post("/nsc", async (req, res) => {
+  try {
+    const nsc = new NSC({
+      userId: req.body.userId,
+      nameOfCertificate: req.body.nameOfCertificate,
+      dateOfInvest: req.body.dateOfInvest,
+      amount: req.body.amount,
+      numberOfCertificates: req.body.numberOfCertificates,
+      purpose: req.body.purpose,
+      dependentName: req.body.dependentName,
+    });
+    const newNsc = await nsc.save();
+    console.log("inserted NSC details");
+    res.send(newNsc);
   } catch (error) {
     res.status(401).send({ message: error.message });
   }

@@ -14,16 +14,16 @@ const SecondQpage = ({setAnsTwo}) => {
         history.push('/qstns/page3')
     }
 
-    useEffect(() => {
-        if(seconds>0){
-            setTimeout(() => {
-                setSeconds(seconds-1)
-            }, 1000);
-        }
-        else{
-            history.push('/qstns/page3')
-        }       
-    })
+    // useEffect(() => {
+    //     if(seconds>0){
+    //         setTimeout(() => {
+    //             setSeconds(seconds-1)
+    //         }, 1000);
+    //     }
+    //     else{
+    //         history.push('/qstns/page3')
+    //     }       
+    // })
     return (
         <Box>
         <Container >

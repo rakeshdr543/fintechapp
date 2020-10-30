@@ -17,15 +17,15 @@ const FirstQpage = ({ setAnsOne, ansOne }) => {
     history.push("/qstns/page2");
   };
 
-  useEffect(() => {
-    if (seconds > 0) {
-      setTimeout(() => {
-        setSeconds(seconds - 1);
-      }, 1000);
-    } else {
-      history.push("/qstns/page2");
-    }
-  }, [seconds]);
+  // useEffect(() => {
+  //   if (seconds > 0) {
+  //     setTimeout(() => {
+  //       setSeconds(seconds - 1);
+  //     }, 1000);
+  //   } else {
+  //     history.push("/qstns/page2");
+  //   }
+  // }, [seconds]);
   return (
     <Box>
       <Container>
