@@ -1,15 +1,17 @@
 import express from "express";
 import Bond from "../models/objectiveModels/Bonds";
 import CreditCardBill from "../models/objectiveModels/CreditCardBillsModel";
+import Gold from "../models/objectiveModels/GoldSilver";
 import InsurancePremium from "../models/objectiveModels/InsurancePremium";
 import LoanEMI from "../models/objectiveModels/LoanEMI";
 import Mortage from "../models/objectiveModels/Mortgage";
 import MutualFund from "../models/objectiveModels/MutualFund";
 import NSC from "../models/objectiveModels/NSC";
+import PMS from "../models/objectiveModels/PMS";
 
 const router = express.Router();
 
-//Post request for credicard details
+//Post request for credit card details
 router.post("/creditCardBill", async (req, res) => {
   try {
     const creditCardBill = new CreditCardBill({
@@ -135,7 +137,7 @@ router.post("/nsc", async (req, res) => {
   try {
     const nsc = new NSC({
       userId: req.body.userId,
-      nameOfCertificate: req.body.nameOfCertificate,
+      investedIn: req.body.investedIn,
       dateOfInvest: req.body.dateOfInvest,
       amount: req.body.amount,
       numberOfCertificates: req.body.numberOfCertificates,
@@ -145,6 +147,48 @@ router.post("/nsc", async (req, res) => {
     const newNsc = await nsc.save();
     console.log("inserted NSC details");
     res.send(newNsc);
+  } catch (error) {
+    res.status(401).send({ message: error.message });
+  }
+});
+
+//Post request for PMS / AIF / IREF
+
+router.post("/pms", async (req, res) => {
+  try {
+    const pms = new PMS({
+      userId: req.body.userId,
+      investedIn: req.body.investedIn,
+      brokerName: req.body.brokerName,
+      amountOfInvestment: req.body.amountOfInvestment,
+      dateOfInvestment: req.body.dateOfInvestment,
+      purposeOfInvestment: req.body.purposeOfInvestment,
+      dependentName: req.body.dependentName,
+    });
+    const newPms = await pms.save();
+    console.log("inserted PMS / AIF / IREF details");
+    res.send(newPms);
+  } catch (error) {
+    res.status(401).send({ message: error.message });
+  }
+});
+
+//Post request for Gold / Silver
+
+router.post("/gold", async (req, res) => {
+  try {
+    const gold = new Gold({
+      userId: req.body.userId,
+      whatForm: req.body.whatForm,
+      amount: req.body.amount,
+      dateOfInvestment: req.body.dateOfInvestment,
+      purpose: req.body.purpose,
+
+      dependentName: req.body.dependentName,
+    });
+    const newGold = await gold.save();
+    console.log("inserted Gold/Silver details");
+    res.send(newGold);
   } catch (error) {
     res.status(401).send({ message: error.message });
   }

@@ -3,14 +3,31 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import { Container } from "@material-ui/core";
+import { Button, Container } from "@material-ui/core";
+import { useHistory } from "react-router";
 
-export default function SelectionPage() {
+export default function SelectionPage({ handleSelectedPages }) {
+  const history = useHistory();
   const [creditCard, setCreditCard] = useState(false);
   const [insurancePremium, setInsurancePremium] = useState(false);
   const [loanEMI, setLoanEMI] = useState(false);
   const [mortage, setMortage] = useState(false);
-  const [outstandingBills, setOutstandingBills] = useState(false);
+  const [mutualFunds, setMutualFunds] = useState(false);
+  const [items, setItems] = useState([]);
+
+  const handleSelection = async (e) => {
+    handleSelectedPages(items);
+    console.log(items);
+  };
+
+  const handleChange = (e) => {
+    if (e.target.checked) {
+      setItems([...items, e.target.name]);
+    } else {
+      const newItems = [...items];
+      setItems(newItems.filter((name) => name != e.target.name));
+    }
+  };
   return (
     <React.Fragment>
       <Container maxWidth='sm'>
@@ -23,9 +40,12 @@ export default function SelectionPage() {
               control={
                 <Checkbox
                   color='primary'
-                  name='Credit Card Bills'
+                  name='creditCard'
                   checked={creditCard}
-                  onClick={(e) => setCreditCard(!creditCard)}
+                  onClick={(e) => {
+                    setCreditCard(!creditCard);
+                    handleChange(e);
+                  }}
                 />
               }
               label='Credit Card Bills'
@@ -36,9 +56,12 @@ export default function SelectionPage() {
               control={
                 <Checkbox
                   color='primary'
-                  name='Insurance Premium'
+                  name='insurancePremium'
                   checked={insurancePremium}
-                  onClick={(e) => setInsurancePremium(!insurancePremium)}
+                  onClick={(e) => {
+                    setInsurancePremium(!insurancePremium);
+                    handleChange(e);
+                  }}
                 />
               }
               label='Insurance Premium'
@@ -51,7 +74,10 @@ export default function SelectionPage() {
                   color='primary'
                   name='loanEMI'
                   checked={loanEMI}
-                  onClick={(e) => setLoanEMI(!loanEMI)}
+                  onClick={(e) => {
+                    setLoanEMI(!loanEMI);
+                    handleChange(e);
+                  }}
                 />
               }
               label='Loan EMI'
@@ -64,7 +90,10 @@ export default function SelectionPage() {
                   color='primary'
                   name='mortage'
                   checked={mortage}
-                  onClick={(e) => setMortage(!mortage)}
+                  onClick={(e) => {
+                    setMortage(!mortage);
+                    handleChange(e);
+                  }}
                 />
               }
               label='Mortage'
@@ -75,15 +104,26 @@ export default function SelectionPage() {
               control={
                 <Checkbox
                   color='primary'
-                  name='outstandingBills'
-                  checked={outstandingBills}
-                  onClick={(e) => setOutstandingBills(!outstandingBills)}
+                  name='mutualFunds'
+                  checked={mutualFunds}
+                  onClick={(e) => {
+                    setMutualFunds(!mutualFunds);
+                    handleChange(e);
+                  }}
                 />
               }
-              label='Outstanding Bills'
+              label='Mutual Funds'
             />
           </Grid>
         </Grid>
+        <Button
+          variant='contained'
+          color='primary'
+          onClick={handleSelection}
+          className=''
+        >
+          Continue
+        </Button>
       </Container>
     </React.Fragment>
   );
